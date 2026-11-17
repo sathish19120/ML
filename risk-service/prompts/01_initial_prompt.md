@@ -1,1 +1,5 @@
-(paste the assignment text / your first prompt here)
+# Prompt 1
+
+I pasted the take-home assignment and uploaded mock_model_artifacts.zip.
+
+---
