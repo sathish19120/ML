@@ -1,0 +1,10 @@
+services:
+  risk-service:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./audit_logs:/app/audit_logs
+      # mount artifacts so rollback = edit manifest + POST /model/reload (no rebuild)
+      - ./model_artifacts:/app/model_artifacts
+    restart: unless-stopped

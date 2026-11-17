@@ -1,0 +1,6 @@
+audit_logs/*
+!audit_logs/.gitkeep
+__pycache__/
+*.pyc
+.venv/
+.ruff_cache/
