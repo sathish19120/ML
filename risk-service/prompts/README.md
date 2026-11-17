@@ -1,5 +1,5 @@
 # LLM usage
-
+An LLM assistant was used.
 
 
 All prompts are in this folder, in order:
