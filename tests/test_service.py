@@ -49,7 +49,7 @@ class Base(unittest.TestCase):
         if not os.path.exists(self.audit):
             return []
         with open(self.audit) as f:
-            return [json.loads(l) for l in f.read().splitlines()]
+            return [json.loads(ln) for ln in f.read().splitlines()]
 
 
 class TestModel(Base):
@@ -164,11 +164,11 @@ class TestGuardrailsAndAudit(Base):
         self.post([{"id": "a", "text": "phish"}], request_id="blk1")
         self.c.post("/predict", data="{}", headers={"Content-Type": "application/json"})
         lines = self.audit_lines()
-        self.assertEqual([l["status"] for l in lines], ["success", "error", "blocked", "error"])
+        self.assertEqual([ln["status"] for ln in lines], ["success", "error", "blocked", "error"])
         keys = {"timestamp", "request_id", "user_hash", "route", "model_version", "artifact_checksum_sha256",
                 "num_inputs", "guardrails_triggered", "status", "latency_ms", "response_checksum_sha256"}
-        for l in lines:
-            self.assertEqual(set(l), keys)
+        for ln in lines:
+            self.assertEqual(set(ln), keys)
         with open(self.audit) as f:
             raw = f.read().lower()
         self.assertNotIn("jane.doe", raw)
@@ -204,9 +204,6 @@ class TestGuardrailsAndAudit(Base):
         self.assertIn("audit_write_errors_total 1", c.get("/metrics").get_data(as_text=True))
 
     def test_logs_redacted(self):
-        buf = io.StringIO()
-        with redirect_stdout(buf):
-            pass
         import logging
         stream = io.StringIO()
         h = logging.StreamHandler(stream)

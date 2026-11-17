@@ -5,10 +5,11 @@ Flask service serving the deterministic rule-based models in `model_artifacts/`.
 ## Run
     pip install -r requirements.txt
     python -m app.main                      # dev, port 8000
-    gunicorn -w 4 -b 0.0.0.0:8000 'app.main:create_app()'   # prod
+    gunicorn -w 1 --threads 4 -b 0.0.0.0:8000 "app.main:create_app()"
 
-    # note: audit log is a per-process append; with multiple workers each write is one O_APPEND
-    # line, so records don't interleave.
+    docker compose up --build               # recommended; service on http://localhost:8000
+
+    # Use ONE worker: metrics and the loaded model are in-process memory.
 
 Env: `MODEL_ARTIFACTS_DIR` (default `./model_artifacts`), `AUDIT_LOG_PATH` (default `./audit_logs/audit.jsonl`), `PORT`.
 
