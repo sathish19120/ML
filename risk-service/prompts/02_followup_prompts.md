@@ -1,4 +1,17 @@
+cat > prompts/02_followup_prompts.md <<'EOF'
+# Follow-up prompts (in order)
 
+- how to implement and how to explain to the interviewer
+- where do I need to run these commands
+- explain the assignment: what is required and how to explain it to the interviewer
+- can we test step by step in our Docker environment locally
+- I don't have a Dockerfile and docker-compose file, can you create them
+- does the zip contain the Dockerfile and docker-compose file
+- what are the next steps (several short follow-ups about git, Docker, ruff and tests)
+- what do I need to add to prompts
+
+I also pasted terminal errors (docker compose path, pip and ruff not found, flask missing) and asked how to fix them.
+EOF
 $ python -m unittest discover -s tests -v
 test_service (unittest.loader._FailedTest.test_service) ... ERROR
 
