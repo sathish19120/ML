@@ -1,6 +1,6 @@
 # LLM usage
 
-An LLM (Claude) was used to help write the code, tests, Dockerfile, compose file and CI workflow.
+
 
 All prompts are in this folder, in order:
 - `01_initial_prompt.md` - the assignment text I gave the LLM.
